@@ -1,3 +1,7 @@
+# --- LOGO/MENU' ---
+IMAGE_2 ="icons/menu.jpg"
+
+
 # --- DIMENSIONS ---
 OUTPUT_width = '95%'
 OUTPUT_height = 550

@@ -61,7 +61,7 @@ ttl = '10m'
 ttl_references = '10m'
 conn = st.connection("gsheets", type=GSheetsConnection)
 df_point = conn.read(ttl=ttl,worksheet="ratten-terschelling")
-df_references = conn.read(ttl=ttl_references,worksheet="df_users")
+df_references = conn.read(ttl=ttl_references,worksheet="users-ratten_terschelling")
 
 # --- APP ---
 if "login" not in st.session_state:

@@ -150,7 +150,7 @@ for i in range(len(df_2)):
             
 
 output = st_folium(map,
-                   # returned_objects=["last_object_clicked"],
+                   returned_objects=["last_object_clicked"],
                    width=OUTPUT_width, height=OUTPUT_height,feature_group_to_add=list(functie_dictionary.values()))
 output
 try:
@@ -161,7 +161,6 @@ try:
         lat = coordinates['lat']
         
         id = str(lng)+str(lat)
-        st.write(id)
         with st.sidebar:
             if st.button("Waarneming bijwerken",use_container_width=True):
                 update_item(id)

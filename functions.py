@@ -123,7 +123,7 @@ def map():
 
         
 @st.dialog(" ")
-def input_data(output):
+def input_data(output,df_old):
 
     waarnemer = st.session_state.login['name']
     

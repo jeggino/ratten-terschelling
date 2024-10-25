@@ -74,11 +74,11 @@ with st.sidebar:
     
 
 IMAGE = "icons/menu.jpg"
-st.logo(IMAGE,  link="https://www.elskenecologie.nl/#:~:text=Elsken%20Ecologie%20is%20het%20onafhankelijke%20ecologisch%20advies-%20en", icon_image=IMAGE)
+# st.logo(IMAGE,  link="https://www.elskenecologie.nl/#:~:text=Elsken%20Ecologie%20is%20het%20onafhankelijke%20ecologisch%20advies-%20en", icon_image=IMAGE)
 
 try:
     
-    df_2 = df_point[df_point['project']=="Ratten Terschelling"]
+    df_2 = df_point
     df_2["datum"] = pd.to_datetime(df_2["datum"]).dt.date
         
     st.sidebar.subheader("Filter op",divider=False)

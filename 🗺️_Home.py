@@ -132,31 +132,24 @@ GroupedLayerControl(
 
 for i in range(len(df_2)):
 
-    if df_2.iloc[i]['geometry_type'] == "Point":
+    if df_2.iloc[i]['functie'] == "Waarneming rat doorgegeven, geen actie op ondernomen":
+        ICON_SIZE_2 = ICON_SIZE_rat_maybe
 
-        if (df_2.iloc[i]['sp']=="Huismus") & (df_2.iloc[i]['functie'] in ["mogelijke nestlocatie","nestlocatie"]):
-            ICON_SIZE_2 = ICON_SIZE_huismus
+    else:
+        ICON_SIZE_2 = ICON_SIZE
+        
 
-        elif df_2.iloc[i]['functie'] == "Waarneming rat doorgegeven, geen actie op ondernomen":
-            ICON_SIZE_2 = ICON_SIZE_rat_maybe
+    html = popup_html(i)
+    popup = folium.Popup(folium.Html(html, script=True), max_width=300)
+    fouctie_loop = functie_dictionary[df_2.iloc[i]['functie']]
 
-        else:
-            ICON_SIZE_2 = ICON_SIZE
+    folium.Marker([df_2.iloc[i]['lat'], df_2.iloc[i]['lng']],
+                  popup=popup,
+                  icon=folium.features.CustomIcon(df_2.iloc[i]["icon_data"], icon_size=ICON_SIZE_2)
+                 ).add_to(fouctie_loop)
             
 
-        html = popup_html(i)
-        popup = folium.Popup(folium.Html(html, script=True), max_width=300)
-        fouctie_loop = functie_dictionary[df_2.iloc[i]['functie']]
 
-        folium.Marker([df_2.iloc[i]['lat'], df_2.iloc[i]['lng']],
-                      popup=popup,
-                      icon=folium.features.CustomIcon(df_2.iloc[i]["icon_data"], icon_size=ICON_SIZE_2)
-                     ).add_to(fouctie_loop)
-            
-
-    elif df_2.iloc[i]['geometry_type'] == "LineString":
-
-        folium.PolyLine(df_2.iloc[i]['coordinates']).add_to(fg)
 
     
 col_1,col_2,col_3 = st.columns([1,11,1],gap="small") 

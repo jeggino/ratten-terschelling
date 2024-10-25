@@ -57,7 +57,7 @@ st.markdown(reduce_header_height_style, unsafe_allow_html=True)
 from functions import *
 
 #---DATASET---
-ttl = '10m'
+ttl = 0
 ttl_references = '10m'
 conn = st.connection("gsheets", type=GSheetsConnection)
 df_point = conn.read(ttl=ttl,worksheet="ratten-terschelling")

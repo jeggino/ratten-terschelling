@@ -159,6 +159,7 @@ try:
         lat = coordinates['lat']
         
         id = str(lng)+str(lat)
+        st.write(id)
         with st.sidebar:
             if st.button("Waarneming bijwerken",use_container_width=True):
                 update_item(id)

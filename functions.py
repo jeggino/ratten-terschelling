@@ -98,7 +98,7 @@ def logOut():
 
 
 # --- FUNCTIONS ---
-def insert_json(key,waarnemer,datum,datum_2,time,soortgroup,functie,geometry_type,lat,lng,opmerking):
+def insert_json(key,waarnemer,datum,datum_2,time,soortgroup,functie,geometry_type,lat,lng,opmerking,df_old):
     
     data = [{"key":key, "waarnemer":waarnemer,"datum":datum,"datum_2":datum_2,"time":time,"soortgroup":soortgroup, 
              "functie":functie,"geometry_type":geometry_type,"lat":lat,"lng":lng,"opmerking":opmerking}]
@@ -191,10 +191,10 @@ def input_data(output):
 
             else:
 
-                insert_json(key,waarnemer,str(datum),str(datum_2),str(time),soortgroup,functie,geometry_type,lat,lng,opmerking)
+                insert_json(key,waarnemer,str(datum),str(datum_2),str(time),soortgroup,functie,geometry_type,lat,lng,opmerking,df_old)
 
                 st.success('Gegevens opgeslagen!', icon="✅")       
-                st.rerun()
+                # st.rerun()
                 # st.switch_page("🗺️_Home.py")
                 
         except:

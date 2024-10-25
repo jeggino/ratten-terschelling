@@ -161,7 +161,7 @@ try:
         id = str(lng)+str(lat)
         with st.sidebar:
             if st.button("Waarneming bijwerken",use_container_width=True):
-                update_item()
+                update_item(id)
             with st.form("entry_form", clear_on_submit=True,border=False):
                 submitted = st.form_submit_button(":red[**Verwijder waarneming**]",use_container_width=True)
                 if submitted:

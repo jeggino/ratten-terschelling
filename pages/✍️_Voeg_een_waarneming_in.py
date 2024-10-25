@@ -59,7 +59,7 @@ output_map = map()
 output_map
 try:
     if len(output_map["features"]) != 0:
-        input_data(output_map,)
+        input_data(output_map,df_old)
 except:
     st.stop()
     

@@ -45,23 +45,23 @@ st.markdown(reduce_header_height_style, unsafe_allow_html=True)
 
 
 # --- APP ---  
-try:        
-    st.logo(IMAGE_2,  link=None, icon_image=IMAGE_2)
+# try:        
+st.logo(IMAGE_2,  link=None, icon_image=IMAGE_2)
 
-    waarnemer = st.session_state.login['name']
-    
-    
-    conn = st.connection("gsheets", type=GSheetsConnection)
-    df_old = conn.read(ttl=0,worksheet="ratten-terschelling")
+waarnemer = st.session_state.login['name']
 
-        
-    output_map = map()
+
+conn = st.connection("gsheets", type=GSheetsConnection)
+df_old = conn.read(ttl=0,worksheet="ratten-terschelling")
+
     
-    try:
-        if len(output_map["features"]) != 0:
-            input_data(output_map,)
-    except:
-        st.stop()
-    
+output_map = map()
+
+try:
+    if len(output_map["features"]) != 0:
+        input_data(output_map,)
 except:
-    st.switch_page("🗺️_Home.py")
+    st.stop()
+    
+# except:
+#     st.switch_page("🗺️_Home.py")

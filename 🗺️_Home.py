@@ -152,7 +152,6 @@ for i in range(len(df_2)):
 output = st_folium(map,
                    returned_objects=["last_object_clicked"],
                    width=OUTPUT_width, height=OUTPUT_height,feature_group_to_add=list(functie_dictionary.values()))
-output
 try:
     if len(output["last_object_clicked"]) != 0:
         coordinates = output["last_object_clicked"]

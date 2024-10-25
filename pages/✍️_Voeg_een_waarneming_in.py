@@ -46,7 +46,7 @@ from functions import *
 
 # --- APP ---  
 # try:        
-st.logo(IMAGE_2,  link=None, icon_image=IMAGE_2)
+st.logo(IMAGE_2,  link="https://www.elskenecologie.nl/#:~:text=Elsken%20Ecologie%20is%20het%20onafhankelijke%20ecologisch%20advies-%20en", icon_image=IMAGE_2)
 
 waarnemer = st.session_state.login['name']
 

@@ -127,7 +127,6 @@ def input_data(output,df_old):
 
     waarnemer = st.session_state.login['name']
     
-    
     datum = st.date_input("Datum","today")       
     nine_hours_from_now = datetime.now() + timedelta(hours=2)
     time = st.time_input("Tijd", nine_hours_from_now)
@@ -168,8 +167,6 @@ def input_data(output,df_old):
     opmerking = st.text_input("", placeholder="Vul hier een opmerking in ...")
     
     st.divider()
-
-    output
         
     submitted = st.button("**Gegevens opslaan**",use_container_width=True)
     
@@ -194,8 +191,72 @@ def input_data(output,df_old):
                 insert_json(key,waarnemer,str(datum),str(datum_2),str(time),soortgroup,functie,geometry_type,lat,lng,opmerking,df_old)
 
                 st.success('Gegevens opgeslagen!', icon="✅")       
-                # st.rerun()
-                # st.switch_page("🗺️_Home.py")
+                st.rerun()
+                st.switch_page("🗺️_Home.py")
                 
         except:
             st.stop()
+
+@st.dialog(" ")
+def update_item():
+
+  datum = st.date_input("Datum","today")
+  nine_hours_from_now = datetime.now() + timedelta(hours=2)
+  time = st.time_input("Tijd", nine_hours_from_now)
+
+  soortgroup = st.selectbox("Opdracht", ['Camera','Vangkooi','Rat val'])
+
+  
+  if soortgroup == 'Camera':
+    
+    functie = st.selectbox("Camera", CAMERA_OPTIONS)
+    
+    if functie in ["Verwijderd, ratten gedetecteerd","Camera verwijderd, geen ratten gedetecteerd"]:
+      datum_2 = st.date_input("Datum camera verwijderd","today")
+    else:
+      datum_2 = None
+  
+  elif soortgroup == 'Rat val':
+    
+    functie = st.selectbox("Rat val", RAT_VAL_OPTIONS)
+
+    if functie in ['Schietval verwijderd, geen rat gedood','Schietval verwijderd, rat gedood']:
+      datum_2 = st.date_input("Datum Val verwijderd","today")
+    else:
+      datum_2 = None
+      
+  elif soortgroup == 'Vangkooi':
+    
+    functie = st.selectbox("Rat vangkooi", RAT_VANGKOOI_OPTIONS)
+
+    if functie in ['vangkooi verwijderd, rat gevangen','vangkooi verwijderd, geen rat gevangen']:
+      datum_2 = st.date_input("Datum vangkooi verwijderd","today")
+    else:
+      datum_2 = None
+      
+
+  opmerking = st.text_input("", placeholder="Vul hier een opmerking in ...")
+
+  if st.button("**Update**",use_container_width=True):
+    df = conn.read(ttl=0,worksheet="df_observations")
+    df_filter = df[df["key"]==id].reset_index(drop=True)
+      
+    id_lat = df_filter['lat'][0]
+    id_lng = df_filter['lng'][0]
+    id_waarnemer = df_filter['waarnemer'][0]
+    id_key = df_filter['key'][0]
+    id_soortgroup = df_filter['soortgroup'][0]
+    id_geometry_type = df_filter['geometry_type'][0]
+      
+    df_drop = df[~df.apply(tuple, axis=1).isin(df_filter.apply(tuple, axis=1))]
+    conn.update(worksheet='df_observations',data=df_drop)
+    df = conn.read(ttl=0,worksheet="df_observations")
+      
+    data = [{"key":id_key, "waarnemer":id_waarnemer,"datum":str(datum),"datum_2":str(datum_2),"time":time,"soortgroup":id_soortgroup,"functie":functie,
+             "geometry_type":id_geometry_type,"lat":id_lat,"lng":id_lng,"opmerking":opmerking}]
+      
+    df_new = pd.DataFrame(data)
+    df_updated = pd.concat([df,df_new],ignore_index=True)
+    conn.update(worksheet='ratten-terschelling',data=df_updated)
+
+    st.rerun()

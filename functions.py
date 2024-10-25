@@ -15,7 +15,7 @@ df_references = conn.read(ttl=ttl_references,worksheet="df_users")
 
 
 # --- FUNCTIONS ---
-def popup_html(row):
+def popup_html(row,df_2):
     
     i = row
 

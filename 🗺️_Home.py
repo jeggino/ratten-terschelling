@@ -15,14 +15,14 @@ import ast
 from credentials import *
 from functions import *
 
-# ---LAYOUT---
-st.set_page_config(
-    page_title="Ratten Terschelling - Input App",
-    initial_sidebar_state="collapsed",
-    page_icon="🐀",
-    layout="wide",
+# # ---LAYOUT---
+# st.set_page_config(
+#     page_title="Ratten Terschelling - Input App",
+#     initial_sidebar_state="collapsed",
+#     page_icon="🐀",
+#     layout="wide",
     
-)
+# )
 
 
 st.markdown(

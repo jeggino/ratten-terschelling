@@ -1,4 +1,18 @@
 import streamlit as st
+from streamlit_gsheets import GSheetsConnection
+import pandas as pd
+import datetime
+from datetime import datetime, timedelta, date
+
+import ast
+
+#---DATASET---
+ttl = '10m'
+ttl_references = '10m'
+conn = st.connection("gsheets", type=GSheetsConnection)
+df_point = conn.read(ttl=ttl,worksheet="ratten-terschelling")
+df_references = conn.read(ttl=ttl_references,worksheet="df_users")
+
 
 # --- FUNCTIONS ---
 def popup_html(row):

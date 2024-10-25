@@ -92,7 +92,7 @@ df_2["icon_data"] = df_2.apply(lambda x: icon_dictionary[x["soortgroup"]][x["sp"
                                else icon_dictionary[x["soortgroup"]][x["functie"]], 
                                axis=1
                  )
-
+df_2
 map = folium.Map(location=(df_2["lat"].mean(), df_2["lng"].mean()),zoom_start=11,tiles=None)
 LocateControl(auto_start=True).add_to(map)
 Fullscreen().add_to(map)

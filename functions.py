@@ -126,7 +126,6 @@ def map():
 def input_data(output):
 
     waarnemer = st.session_state.login['name']
-    soortgroup = st.session_state.project['opdracht']
     
     
     datum = st.date_input("Datum","today")       

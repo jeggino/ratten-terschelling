@@ -45,23 +45,22 @@ st.markdown(reduce_header_height_style, unsafe_allow_html=True)
 from functions import *
 
 # --- APP ---  
-# try:        
-st.logo(IMAGE_2,  link="https://www.elskenecologie.nl/#:~:text=Elsken%20Ecologie%20is%20het%20onafhankelijke%20ecologisch%20advies-%20en", icon_image=IMAGE_2)
-
-waarnemer = st.session_state.login['name']
-
-
-conn = st.connection("gsheets", type=GSheetsConnection)
-df_old = conn.read(ttl=0,worksheet="ratten-terschelling")
-
+try:        
+    st.logo(IMAGE_2,  link="https://www.elskenecologie.nl/#:~:text=Elsken%20Ecologie%20is%20het%20onafhankelijke%20ecologisch%20advies-%20en", icon_image=IMAGE_2)
     
-output_map = map()
-output_map
-try:
-    if len(output_map["features"]) != 0:
-        input_data(output_map,df_old)
+    waarnemer = st.session_state.login['name']
+    
+    
+    conn = st.connection("gsheets", type=GSheetsConnection)
+    df_old = conn.read(ttl=0,worksheet="ratten-terschelling")
+    
+        
+    output_map = map()
+    try:
+        if len(output_map["features"]) != 0:
+            input_data(output_map,df_old)
+    except:
+        st.stop()
+    
 except:
-    st.stop()
-    
-# except:
-#     st.switch_page("🗺️_Home.py")
+    st.switch_page("🗺️_Home.py")

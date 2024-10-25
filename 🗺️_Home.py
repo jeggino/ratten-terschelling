@@ -13,16 +13,16 @@ import random
 import ast
 
 from credentials import *
-from functions import *
 
-# # ---LAYOUT---
-# st.set_page_config(
-#     page_title="Ratten Terschelling - Input App",
-#     initial_sidebar_state="collapsed",
-#     page_icon="🐀",
-#     layout="wide",
+
+# ---LAYOUT---
+st.set_page_config(
+    page_title="Ratten Terschelling - Input App",
+    initial_sidebar_state="collapsed",
+    page_icon="🐀",
+    layout="wide",
     
-# )
+)
 
 
 st.markdown(
@@ -54,6 +54,7 @@ reduce_header_height_style = """
 
 st.markdown(reduce_header_height_style, unsafe_allow_html=True)
 
+from functions import *
 
 #---DATASET---
 ttl = '10m'

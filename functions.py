@@ -139,7 +139,7 @@ def input_data(output):
     soortgroup = st.selectbox("Opdracht", ['Camera','Vangkooi','Rat val'])
     
     if soortgroup == 'Camera':
-        functie = st.selectbox("Camera", CAMERA_OPTIONS)
+        functie = st.selectbox("Camera", CAMERA_OPTIONS,label_visibility='collapsed')
         
         if functie in ["Verwijderd, ratten gedetecteerd","Camera verwijderd, geen ratten gedetecteerd"]:
           datum_2 = st.date_input("Datum camera verwijderd","today")
@@ -148,7 +148,7 @@ def input_data(output):
                 
     elif soortgroup == 'Vangkooi':
     
-        functie = st.selectbox("Rat vangkooi", RAT_VANGKOOI_OPTIONS)
+        functie = st.selectbox("Rat vangkooi", RAT_VANGKOOI_OPTIONS,label_visibility='collapsed')
     
         if functie in ['vangkooi verwijderd, rat gevangen','vangkooi verwijderd, geen rat gevangen']:
           datum_2 = st.date_input("Datum vangkooi verwijderd","today")
@@ -157,7 +157,7 @@ def input_data(output):
         
     elif soortgroup == 'Rat val':
     
-        functie = st.selectbox("Rat val", RAT_VAL_OPTIONS)
+        functie = st.selectbox("Rat val", RAT_VAL_OPTIONS,label_visibility='collapsed')
     
         if functie in ['Schietval verwijderd, geen rat gedood','Schietval verwijderd, rat gedood']:
           datum_2 = st.date_input("Datum rat val verwijderd","today")

@@ -12,6 +12,8 @@ import random
 
 import ast
 
+from credentials import *
+from functions import *
 
 # ---LAYOUT---
 st.set_page_config(

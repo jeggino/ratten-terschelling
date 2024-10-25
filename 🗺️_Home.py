@@ -73,8 +73,8 @@ with st.sidebar:
 
     
 
-IMAGE = "icons/menu.jpg"
-# st.logo(IMAGE,  link="https://www.elskenecologie.nl/#:~:text=Elsken%20Ecologie%20is%20het%20onafhankelijke%20ecologisch%20advies-%20en", icon_image=IMAGE)
+IMAGE = "icon/menu.jpg"
+st.logo(IMAGE,  link="https://www.elskenecologie.nl/#:~:text=Elsken%20Ecologie%20is%20het%20onafhankelijke%20ecologisch%20advies-%20en", icon_image=IMAGE)
 
 # try:
     
@@ -92,7 +92,6 @@ df_2["icon_data"] = df_2.apply(lambda x: icon_dictionary[x["soortgroup"]][x["sp"
                                else icon_dictionary[x["soortgroup"]][x["functie"]], 
                                axis=1
                  )
-df_2
 map = folium.Map(location=(df_2["lat"].mean(), df_2["lng"].mean()),zoom_start=11,tiles=None)
 LocateControl(auto_start=True).add_to(map)
 Fullscreen().add_to(map)
@@ -149,13 +148,7 @@ for i in range(len(df_2)):
                  ).add_to(fouctie_loop)
             
 
-
-
-    
-col_1,col_2,col_3 = st.columns([1,11,1],gap="small") 
-
-with col_2:
-    output_2 = st_folium(map,returned_objects=["last_active_drawing"],width=OUTPUT_width, height=OUTPUT_height,feature_group_to_add=list(functie_dictionary.values()))
+output = st_folium(map,returned_objects=["last_active_drawing"],width=OUTPUT_width, height=OUTPUT_height,feature_group_to_add=list(functie_dictionary.values()))
 
 # except:
 #     st.image("https://media.istockphoto.com/photos/open-empty-cardboard-box-on-a-white-background-picture-id172167710?k=6&m=172167710&s=612x612&w=0&h=Z4fueCweh9q-X_VBRAPCYSalyaAnXG3ioErb8oJSVek=")

@@ -76,3 +76,106 @@ def logOut():
         del st.session_state.login
         # del st.session_state.project     
         st.rerun()
+
+
+# --- FUNCTIONS ---
+def insert_json(key,waarnemer,datum,datum_2,time,soortgroup,functie,geometry_type,lat,lng,opmerking):
+    
+    data = [{"key":key, "waarnemer":waarnemer,"datum":datum,"datum_2":datum_2,"time":time,"soortgroup":soortgroup, 
+             "functie":functie,"geometry_type":geometry_type,"lat":lat,"lng":lng,"opmerking":opmerking}]
+    df_new = pd.DataFrame(data)
+    df_updated = pd.concat([df_old,df_new],ignore_index=True)
+    
+    return conn.update(worksheet="df_observations",data=df_updated)      
+  
+def map():
+    
+    m = folium.Map()
+    Draw(draw_options={'circle': False,'rectangle': False,'circlemarker': False, 'polyline': False, 'polygon': False},
+        position="topright",).add_to(m)
+    Fullscreen(position="topright").add_to(m)
+      
+    LocateControl(auto_start=False,position="topright").add_to(m)
+        
+    output = st_folium(m, returned_objects=["all_drawings"],width=OUTPUT_width, height=OUTPUT_height)
+    output["features"] = output.pop("all_drawings")
+    
+    return  output
+
+        
+@st.dialog(" ")
+def input_data(output):
+
+    waarnemer = st.session_state.login['name']
+    soortgroup = st.session_state.project['opdracht']
+    
+    
+    datum = st.date_input("Datum","today")       
+    nine_hours_from_now = datetime.now() + timedelta(hours=2)
+    time = st.time_input("Tijd", nine_hours_from_now)
+
+    geometry_type = output["features"][0]["geometry"]["type"]
+    
+    st.divider()
+
+    soortgroup = st.selectbox("Opdracht", ['Camera','Vangkooi','Rat val'])
+    
+    if soortgroup == 'Camera':
+        functie = st.selectbox("Camera", CAMERA_OPTIONS)
+        
+        if functie in ["Verwijderd, ratten gedetecteerd","Camera verwijderd, geen ratten gedetecteerd"]:
+          datum_2 = st.date_input("Datum camera verwijderd","today")
+        else:
+          datum_2 = None
+                
+    elif soortgroup == 'Vangkooi':
+    
+        functie = st.selectbox("Rat vangkooi", RAT_VANGKOOI_OPTIONS)
+    
+        if functie in ['vangkooi verwijderd, rat gevangen','vangkooi verwijderd, geen rat gevangen']:
+          datum_2 = st.date_input("Datum vangkooi verwijderd","today")
+        else:
+          datum_2 = None
+        
+    elif soortgroup == 'Rat val':
+    
+        functie = st.selectbox("Rat val", RAT_VAL_OPTIONS)
+    
+        if functie in ['Schietval verwijderd, geen rat gedood','Schietval verwijderd, rat gedood']:
+          datum_2 = st.date_input("Datum rat val verwijderd","today")
+        else:
+          datum_2 = None
+          
+        
+    opmerking = st.text_input("", placeholder="Vul hier een opmerking in ...")
+    
+    st.divider()
+        
+    submitted = st.button("**Gegevens opslaan**",use_container_width=True)
+    
+    if submitted:           
+
+        try:
+
+            coordinates = output["features"][0]["geometry"]["coordinates"] 
+                        
+            lng = coordinates[0]
+            lat = coordinates[1]
+            coordinates = None
+            
+            key = str(lng)+str(lat)
+
+            if len(output["features"]) > 1:
+                st.error("U kunt niet meer dan één waarneming tegelijk uploaden!")
+                st.stop()
+
+            else:
+
+                insert_json(key,waarnemer,str(datum),str(datum_2),str(time),soortgroup,functie,geometry_type,lat,lng,opmerking)
+
+                st.success('Gegevens opgeslagen!', icon="✅")       
+                st.rerun()
+                # st.switch_page("🗺️_Home.py")
+                
+        except:
+            st.stop()

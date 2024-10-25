@@ -139,7 +139,7 @@ for i in range(len(df_2)):
         ICON_SIZE_2 = ICON_SIZE
         
 
-    html = popup_html(i)
+    html = popup_html(i,df_2)
     popup = folium.Popup(folium.Html(html, script=True), max_width=300)
     fouctie_loop = functie_dictionary[df_2.iloc[i]['functie']]
 

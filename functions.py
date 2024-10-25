@@ -240,7 +240,7 @@ def update_item(id):
   if st.button("**Update**",use_container_width=True):
     df = conn.read(ttl=0,worksheet="df_observations")
     df_filter = df[df["key"]==id].reset_index(drop=True)
-      
+    df_filter
     id_lat = df_filter['lat'][0]
     id_lng = df_filter['lng'][0]
     id_waarnemer = df_filter['waarnemer'][0]

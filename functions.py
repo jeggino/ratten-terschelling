@@ -198,7 +198,7 @@ def input_data(output,df_old):
             st.stop()
 
 @st.dialog(" ")
-def update_item():
+def update_item(id):
 
   datum = st.date_input("Datum","today")
   nine_hours_from_now = datetime.now() + timedelta(hours=2)

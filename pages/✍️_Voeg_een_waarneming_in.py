@@ -56,7 +56,7 @@ df_old = conn.read(ttl=0,worksheet="ratten-terschelling")
 
     
 output_map = map()
-
+output_map
 try:
     if len(output_map["features"]) != 0:
         input_data(output_map,)

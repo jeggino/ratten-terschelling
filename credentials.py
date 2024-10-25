@@ -1,5 +1,5 @@
 # --- LOGO/MENU' ---
-IMAGE_2 ="icons/menu.jpg"
+IMAGE_2 ="icon/menu.jpg"
 
 
 # --- DIMENSIONS ---

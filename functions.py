@@ -104,8 +104,8 @@ def insert_json(key,waarnemer,datum,datum_2,time,soortgroup,functie,geometry_typ
              "functie":functie,"geometry_type":geometry_type,"lat":lat,"lng":lng,"opmerking":opmerking}]
     df_new = pd.DataFrame(data)
     df_updated = pd.concat([df_old,df_new],ignore_index=True)
-    conn.update(worksheet="ratten-terschelling",data=df_updated)
-    st.switch_page("🗺️_Home.py")
+    
+    return conn.update(worksheet="ratten-terschelling",data=df_updated)
   
 def map():
     

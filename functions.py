@@ -197,11 +197,11 @@ def input_data(output,df_old):
 
                 # st.success('Gegevens opgeslagen!', icon="✅")       
                 # st.rerun()
-            st.switch_page("🗺️_Home.py")
             st.success('Gegevens opgeslagen!', icon="✅")
                 
         except:
             st.stop()
+        st.switch_page("🗺️_Home.py")
 
 @st.dialog(" ")
 def update_item(id):

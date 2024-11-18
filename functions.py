@@ -135,7 +135,7 @@ def input_data(output,df_old):
     
     st.divider()
 
-    soortgroup = st.selectbox("Opdracht", ['Camera','Vangkooi','Rat val'])
+    soortgroup = st.selectbox("Opdracht", ['Camera','Vangkooi','Rat val','Rat geschoten'])
     
     if soortgroup == 'Camera':
         functie = st.selectbox("Camera", CAMERA_OPTIONS,label_visibility='hidden')
@@ -162,7 +162,11 @@ def input_data(output,df_old):
           datum_2 = st.date_input("Datum rat val verwijderd","today")
         else:
           datum_2 = None
-          
+
+    elif soortgroup == 'Rat val':
+
+        datum_2 = None
+    
         
     opmerking = st.text_input("", placeholder="Vul hier een opmerking in ...")
     
@@ -235,7 +239,10 @@ def update_item(id):
     else:
       datum_2 = None
       
-
+  elif soortgroup == 'Rat val':
+  
+    datum_2 = None
+    
   opmerking = st.text_input("", placeholder="Vul hier een opmerking in ...")
 
   if st.button("**Update**",use_container_width=True):

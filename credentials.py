@@ -13,8 +13,8 @@ ICON_SIZE_huismus = (28,28)
 ICON_SIZE_rat_maybe = (255,150)
 
 # --- OPTIONS ---
-soortgroup =["📷 Camera", "🪤 Rat val", '𐂺 Vangkooi']
-DICT_SORTGROUP = {"📷 Camera":"Camera", "🪤 Rat val":"Rat val",'𐂺 Vangkooi':'Vangkooi'}
+soortgroup =["📷 Camera", "🪤 Rat val", '𐂺 Vangkooi','🔫 Rat geschoten']
+DICT_SORTGROUP = {"📷 Camera":"Camera", "🪤 Rat val":"Rat val",'𐂺 Vangkooi':'Vangkooi','🔫 Rat geschoten':'Rat geschoten'}
 choice_opdracht = [DICT_SORTGROUP[item] for item in soortgroup]
 
 CAMERA_OPTIONS = ["Camera in het veld","Verwijderd, ratten gedetecteerd","Camera verwijderd, geen ratten gedetecteerd",
@@ -36,5 +36,6 @@ icon_dictionary = {
                    'Vangkooi': {'vangkooi in veld':'icon/rat_cage_veld_Nogevangen.png',
                                 'vangkooi in veld, rat gevangen':'icon/rat_cage_veld_gevangen.png',
                                 'vangkooi verwijderd, rat gevangen':'icon/rat_cage_noveld_gevangen.png',
-                                'vangkooi verwijderd, geen rat gevangen':'icon/rat_cage_noveld_Nogevangen.png'}
+                                'vangkooi verwijderd, geen rat gevangen':'icon/rat_cage_noveld_Nogevangen.png'},
+    'Rat geschoten':{'Rat geschoten':'icon/rat_shot.png'}
 }

@@ -163,8 +163,9 @@ def input_data(output,df_old):
         else:
           datum_2 = None
 
-    elif soortgroup == 'Rat val':
+    elif soortgroup == 'Rat geschoten':
 
+        functie = 'Rat geschoten'
         datum_2 = None
     
         
@@ -239,9 +240,10 @@ def update_item(id):
     else:
       datum_2 = None
       
-  elif soortgroup == 'Rat val':
+  elif soortgroup == 'Rat geschoten':
   
     datum_2 = None
+    functie = 'Rat geschoten'
     
   opmerking = st.text_input("", placeholder="Vul hier een opmerking in ...")
 

@@ -29,6 +29,7 @@ def popup_html(row,df_2):
     functie=df_2['functie'].iloc[i]
     opmerking=df_2['opmerking'].iloc[i]
     waarnemer=df_2['waarnemer'].iloc[i] 
+    aantal=df_2['aantal'].iloc[i]
        
 
     left_col_color = "#19a7bd"
@@ -58,6 +59,10 @@ def popup_html(row,df_2):
     <tr>
     <td style="background-color: """+ left_col_color +""";"><span style="color: #ffffff;">Opmerking</span></td>
     <td style="width: 150px;background-color: """+ right_col_color +""";">{}</td>""".format(opmerking) + """
+    </tr>
+    <tr>
+    <td style="background-color: """+ left_col_color +""";"><span style="color: #ffffff;">Aantal geschoten </span></td>
+    <td style="width: 150px;background-color: """+ right_col_color +""";">{}</td>""".format(aantal) + """
     </tr>
 
     </tbody>
@@ -98,10 +103,10 @@ def logOut():
 
 
 # --- FUNCTIONS ---
-def insert_json(key,waarnemer,datum,datum_2,time,soortgroup,functie,geometry_type,lat,lng,opmerking,df_old):
+def insert_json(key,waarnemer,datum,datum_2,time,soortgroup,functie,geometry_type,lat,lng,aantal,opmerking,df_old):
     
     data = [{"key":key, "waarnemer":waarnemer,"datum":datum,"datum_2":datum_2,"time":time,"soortgroup":soortgroup, 
-             "functie":functie,"geometry_type":geometry_type,"lat":lat,"lng":lng,"opmerking":opmerking}]
+             "functie":functie,"geometry_type":geometry_type,"lat":lat,"lng":lng,"aantal":aantal,"opmerking":opmerking}]
     df_new = pd.DataFrame(data)
     df_updated = pd.concat([df_old,df_new],ignore_index=True)
     
@@ -144,6 +149,8 @@ def input_data(output,df_old):
           datum_2 = st.date_input("Datum camera verwijderd","today")
         else:
           datum_2 = None
+
+        aantal = None
                 
     elif soortgroup == 'Vangkooi':
     
@@ -153,6 +160,8 @@ def input_data(output,df_old):
           datum_2 = st.date_input("Datum vangkooi verwijderd","today")
         else:
           datum_2 = None
+
+        aantal = None
         
     elif soortgroup == 'Rat val':
     
@@ -162,10 +171,13 @@ def input_data(output,df_old):
           datum_2 = st.date_input("Datum rat val verwijderd","today")
         else:
           datum_2 = None
+            
+        aantal = None
 
     elif soortgroup == 'Rat geschoten':
 
         functie = 'Rat geschoten'
+        aantal = st.number_input("Aantal geschoten", min_value=1) 
         datum_2 = None
     
         
@@ -193,7 +205,7 @@ def input_data(output,df_old):
 
             else:
 
-                insert_json(key,waarnemer,str(datum),str(datum_2),str(time),soortgroup,functie,geometry_type,lat,lng,opmerking,df_old)
+                insert_json(key,waarnemer,str(datum),str(datum_2),str(time),soortgroup,functie,geometry_type,lat,lng,aantal,opmerking,df_old)
 
                 # st.success('Gegevens opgeslagen!', icon="✅")       
                 # st.rerun()
@@ -221,6 +233,8 @@ def update_item(id):
       datum_2 = st.date_input("Datum camera verwijderd","today")
     else:
       datum_2 = None
+
+    aantal = None
   
   elif soortgroup == 'Rat val':
     
@@ -230,6 +244,8 @@ def update_item(id):
       datum_2 = st.date_input("Datum Val verwijderd","today")
     else:
       datum_2 = None
+
+    aantal = None
       
   elif soortgroup == 'Vangkooi':
     
@@ -239,11 +255,14 @@ def update_item(id):
       datum_2 = st.date_input("Datum vangkooi verwijderd","today")
     else:
       datum_2 = None
+
+    aantal = None
       
   elif soortgroup == 'Rat geschoten':
   
     datum_2 = None
     functie = 'Rat geschoten'
+    aantal = st.number_input("Aantal geschoten", min_value=1)
     
   opmerking = st.text_input("", placeholder="Vul hier een opmerking in ...")
 
@@ -262,7 +281,7 @@ def update_item(id):
     df = conn.read(ttl=0,worksheet="df_observations")
       
     data = [{"key":id_key, "waarnemer":id_waarnemer,"datum":str(datum),"datum_2":str(datum_2),"time":time,"soortgroup":id_soortgroup,"functie":functie,
-             "geometry_type":id_geometry_type,"lat":id_lat,"lng":id_lng,"opmerking":opmerking}]
+             "geometry_type":id_geometry_type,"lat":id_lat,"lng":id_lng,"aantal":aantal,"opmerking":opmerking}]
       
     df_new = pd.DataFrame(data)
     df_updated = pd.concat([df,df_new],ignore_index=True)

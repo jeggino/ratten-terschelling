@@ -114,7 +114,7 @@ def map():
         position="topright",).add_to(m)
     Fullscreen(position="topright").add_to(m)
       
-    LocateControl(auto_start=False,position="topright").add_to(m)
+    LocateControl(auto_start=True,position="topright").add_to(m)
         
     output = st_folium(m, returned_objects=["all_drawings"],width=OUTPUT_width, height=OUTPUT_height)
     output["features"] = output.pop("all_drawings")

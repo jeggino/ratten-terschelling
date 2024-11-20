@@ -222,7 +222,7 @@ def update_item(id):
   nine_hours_from_now = datetime.now() + timedelta(hours=2)
   time = st.time_input("Tijd", nine_hours_from_now)
 
-  soortgroup = st.selectbox("Opdracht", ['Camera','Vangkooi','Rat val'])
+  soortgroup = st.selectbox("Opdracht", ['Camera','Vangkooi','Rat val','Rat geschoten'])
 
   
   if soortgroup == 'Camera':

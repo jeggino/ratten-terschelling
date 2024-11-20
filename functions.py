@@ -286,5 +286,5 @@ def update_item(id):
     df_new = pd.DataFrame(data)
     df_updated = pd.concat([df,df_new],ignore_index=True)
     conn.update(worksheet='ratten-terschelling',data=df_updated)
+    st.switch_page("🗺️_Home.py")
 
-    st.rerun()
